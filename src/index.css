@@ -1,13 +1,75 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', 'Roboto', 
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.container {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.uploadContainer {
+  display: flex;
+  flex-direction: column;
+  transition: 0.4s ease;
+  align-items: center;
+  justify-content: center;
+  width: min(75vw, 400px);  
+  aspect-ratio: 1 / 1; 
+  padding: 2rem;
+  border: 2px dashed gray;
+  border-radius: 1rem;
+  font-weight: 600;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.errorMsg{
+  color: red;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+
+
+.selectFileButton {
+  all: unset;
+  background-color: blue;
+  cursor: pointer;
+  padding: 1rem 4rem;
+  font-weight: 700;
+  color: white;
+  border-radius: 1rem;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.uploadIcon {
+  font-size: 40pt;
+  transition: 0.4s ease;
+}
+
+.uploadContainer:hover .uploadIcon,
+.uploadContainer.dragging .uploadIcon {
+  font-size: 42pt;
+  color: blue;
+  transition: 0.4s ease;
+}
+
+.uploadContainer.dragging {
+  border-color: blue;
+  background-color: rgba(0, 0, 255, 0.1);
 }
