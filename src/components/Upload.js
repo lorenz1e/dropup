@@ -6,13 +6,13 @@ import { v4 } from "uuid";
 import QRCode from "react-qr-code";
 import { FiUploadCloud } from "react-icons/fi";
 import { Spinner } from "react-activity";
-import { render } from "react-dom";
+import "react-activity/dist/Spinner.css";
+import { useUpload } from "../UploadHistoryContext";
 
-import "react-activity/dist/Dots.css";
+function Upload() {
+  const ip = "http://172.20.10.2:3001";
 
-function UploadComponent() {
-  const ip = "http://192.168.0.203:3000";
-
+  const {addUpload} = useUpload();
   const supabase = useSupabase();
   const [fileUpload, setFileUpload] = useState(null);
   const [uploading, setUploading] = useState(false);
@@ -52,13 +52,16 @@ function UploadComponent() {
 
       setID(id);
       setUploadComplete(true);
+      addUpload(id, fileUpload.name);
+
     } catch (error) {
       setUploadComplete(false);
-      setErrorMessage(error.message);
+      console.log(error.message)
     } finally {
       setUploading(false);
     }
   };
+
 
   const handleDragOver = (event) => {
     event.preventDefault();
@@ -82,11 +85,15 @@ function UploadComponent() {
   if (uploading) {
     return (
       <div className="uploadContainer">
-        <Spinner></Spinner>
+        <Spinner />
+        <div>
+          Uploading...
+          <div className="uploadingSubText">this might take a while</div>
+        </div>
       </div>
     );
   } else if (uploadComplete && id) {
-    return <QRCode value={`${ip}/${id}`} />;
+    return <QRCode value={`${ip}/${id}`} className="qrCode" />;
   }
 
   return (
@@ -98,6 +105,7 @@ function UploadComponent() {
         onDrop={handleDrop}
       >
         <FiUploadCloud className="uploadIcon" />
+
         <div>Drag & Drop files here or click to select</div>
 
         <div className="selectFileButton">Select files</div>
@@ -112,4 +120,4 @@ function UploadComponent() {
   );
 }
 
-export default UploadComponent;
+export default Upload;

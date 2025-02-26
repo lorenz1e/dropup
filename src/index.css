@@ -1,3 +1,7 @@
+:root {
+  --primary: #002BFF;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', 'Roboto', 
@@ -5,6 +9,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 code {
@@ -12,11 +18,12 @@ code {
 }
 
 .container {
-  height: 90vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  gap: 3rem;
+  padding: 1rem;
+  max-width: 100%;
 }
 
 .uploadContainer {
@@ -25,32 +32,39 @@ code {
   transition: 0.4s ease;
   align-items: center;
   justify-content: center;
-  width: min(75vw, 400px);  
+  width: 100%;
+  max-width: 600px;
   aspect-ratio: 1 / 1; 
-  padding: 2rem;
+  padding: 1rem;
   border: 2px dashed gray;
   border-radius: 1rem;
   font-weight: 600;
-  gap: 1.5rem;
+  gap: 1rem;
   text-align: center;
+  box-sizing: border-box;
+  align-self: center;
 }
 
-.errorMsg{
+.errorMsg {
   color: red;
   margin-top: 1rem;
   font-weight: 600;
+  text-align: center;
+  word-wrap: break-word;
+  max-width: 100%;
 }
-
-
 
 .selectFileButton {
   all: unset;
-  background-color: blue;
+  background-color: var(--primary);
   cursor: pointer;
-  padding: 1rem 4rem;
+  padding: 0.8rem 2rem;
   font-weight: 700;
   color: white;
   border-radius: 1rem;
+  text-align: center;
+  width: auto;
+  max-width: 90%;
 }
 
 input[type="file"] {
@@ -58,18 +72,126 @@ input[type="file"] {
 }
 
 .uploadIcon {
-  font-size: 40pt;
+  font-size: 2.5rem;
   transition: 0.4s ease;
 }
 
 .uploadContainer:hover .uploadIcon,
 .uploadContainer.dragging .uploadIcon {
-  font-size: 42pt;
-  color: blue;
+  font-size: 2.8rem;
+  color: var(--primary);
   transition: 0.4s ease;
 }
 
 .uploadContainer.dragging {
-  border-color: blue;
+  border-color: var(--primary);
   background-color: rgba(0, 0, 255, 0.1);
+}
+
+.uploadingSubText {
+  color: gray;
+  font-weight: 400;
+  text-align: center;
+  max-width: 100%;
+  padding: 0 1rem;
+}
+
+.qrCode {
+  max-width: 100%;
+  height: auto;
+}
+
+.logo {
+  width: 175px;
+  max-width: 80%;
+  cursor: pointer;
+}
+
+.content {
+  gap: 2rem;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.historyContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+}
+
+@media (max-width: 1000px) {
+  .content {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    gap: 2rem;
+  }
+  
+  .uploadContainer {
+    max-width: 90%;
+    aspect-ratio: auto;
+    min-height: 300px;
+  }
+  
+  .selectFileButton {
+    padding: 0.7rem 1.5rem;
+    width: 80%;
+  }
+  
+  .historyHeadline {
+    font-size: x-large;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    gap: 1.5rem;
+  }
+  
+  .uploadContainer {
+    padding: 0.8rem;
+    min-height: 250px;
+  }
+  
+  .uploadIcon {
+    font-size: 2rem;
+  }
+  
+  .uploadContainer:hover .uploadIcon,
+  .uploadContainer.dragging .uploadIcon {
+    font-size: 2.2rem;
+  }
+  
+  .selectFileButton {
+    padding: 0.6rem 1.2rem;
+  }
+  
+  .logo {
+    width: 120px;
+  }
+}
+
+.historyItemContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: gray;
+  padding: 1rem;
+  border-radius: 1rem;
+  gap: 1rem;
+  cursor: pointer;
+  word-wrap: break-word;
+}
+
+.historyHeadline {
+  align-self: baseline;
+  font-size: xx-large;
+  font-weight: 700;
 }
