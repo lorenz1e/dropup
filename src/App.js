@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Upload from "./components/Upload";
 import { History } from "./components/History";
 import logo from "./logo.svg";
 import { UploadProvider } from "./UploadHistoryContext";
 
 function App() {
+
   return (
     <div className="container">
       <img src={logo} className="logo"></img>

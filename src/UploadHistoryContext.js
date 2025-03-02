@@ -17,7 +17,7 @@ export const UploadProvider = ({ children }) => {
   console.log(uploadHistory)
 
   const addUpload = (fileID, fileName) => {
-    const newEntry = { id: fileID, fileName, date: new Date().toISOString() };
+    const newEntry = { id: fileID, fileName, date: new Date().toLocaleString() };
     const updatedHistory = [...uploadHistory, newEntry];
 
     setUploadHistory(updatedHistory);

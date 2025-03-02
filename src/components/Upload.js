@@ -12,7 +12,7 @@ import { useUpload } from "../UploadHistoryContext";
 function Upload() {
   const ip = "http://172.20.10.2:3001";
 
-  const {addUpload} = useUpload();
+  const { addUpload } = useUpload();
   const supabase = useSupabase();
   const [fileUpload, setFileUpload] = useState(null);
   const [uploading, setUploading] = useState(false);
@@ -53,15 +53,13 @@ function Upload() {
       setID(id);
       setUploadComplete(true);
       addUpload(id, fileUpload.name);
-
     } catch (error) {
       setUploadComplete(false);
-      console.log(error.message)
+      console.log(error.message);
     } finally {
       setUploading(false);
     }
   };
-
 
   const handleDragOver = (event) => {
     event.preventDefault();
@@ -93,7 +91,18 @@ function Upload() {
       </div>
     );
   } else if (uploadComplete && id) {
-    return <QRCode value={`${ip}/${id}`} className="qrCode" />;
+    // return
+
+    return (
+      <div className="uploadContainer">
+        <div className="qrHeadline">
+          <span className="qrHeadlineBlue">{fileUpload.name}</span>
+          <span> is ready to be shared!</span>
+        </div>
+        <QRCode value={`${ip}/${id}`} className="qrCode" />
+        <div className="uploadAnotherButton" onClick={() => window.location.reload()}>Upload another file</div>
+      </div>
+    );
   }
 
   return (
